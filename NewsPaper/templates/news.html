@@ -1,0 +1,24 @@
+{% extends 'flatpages/default.html' %}
+
+{% load censor %}
+
+{% block title %}
+News
+{%endblock title %}
+
+{% block content%}
+    {% if news|length > 1 %}
+        <p>Количество новостей: {{news|length}}</p>
+        <br>
+        {% for NnA in news%}
+            <a href={{NnA.pk}}>{{NnA.title}}</a> {{NnA.datetime|date:'d-M-Y H:i'}} {{NnA.text|Censor|truncatechars:50}} 
+            <br>
+        {% endfor %}
+    {% else %}
+        <p>{{news.get_type_of_content_display}} {{news.title}} Автор: {{news.author.user.username}} Категория: {{news.category}} Дата публикации:{{news.datetime|date:'d-M-Y H:i'}}</p>
+        <div>{{news.text|Censor}}</div>
+        <p>Рейтинг статьи: {{news.rating}}</p>
+
+    {%endif%}
+
+{% endblock content%}
