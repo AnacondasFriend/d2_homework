@@ -81,6 +81,9 @@ class Post(models.Model):
     def preview(self):
         return self.text[0:123] + '...'
     
+    def get_absolute_url(self): # добавим абсолютный путь, чтобы после создания нас перебрасывало на страницу с товаром
+        return f'/news/{self.id}' 
+    
     def __str__(self):
         return f'{self.title} {self.author}\n{self.text}'
     

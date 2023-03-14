@@ -1,0 +1,18 @@
+{% extends 'flatpages/default.html' %}
+
+{% load censor %}
+
+{% block title %}
+News
+{%endblock title %}
+
+{% block content%}
+
+        <p>{{news.get_type_of_content_display}} {{news.title}} Автор: {{news.author.user.username}} Категория: {{news.category.category_name}} Дата публикации: {{news.datetime|date:'d-M-Y H:i'}}</p>
+        <div>{{news.text|Censor}}</div>
+        <p>Рейтинг статьи: {{news.rating}}</p>
+        <a href = {{news.pk}}/edit>Редактировать</a>
+        <a href = {{news.pk}}/delete>Удалить</a>
+
+
+{% endblock content%}
